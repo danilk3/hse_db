@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  library_postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "KOTELNIKOV_205"
+      POSTGRES_USER: "KOTELNIKOV_205"
+      POSTGRES_PASSWORD: "KOTELNIKOV_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./docker/db/scripts/library.sql:/docker-entrypoint-initdb.d/library.sql
+      - ./library_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5440:5432"
+      
+  trains_postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "KOTELNIKOV_205"
+      POSTGRES_USER: "KOTELNIKOV_205"
+      POSTGRES_PASSWORD: "KOTELNIKOV_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./docker/db/scripts/trains.sql:/docker-entrypoint-initdb.d/trains.sql
+      - ./trains_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5441:5432"
+      
+      
+  hospital_postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "KOTELNIKOV_205"
+      POSTGRES_USER: "KOTELNIKOV_205"
+      POSTGRES_PASSWORD: "KOTELNIKOV_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./docker/db/scripts/hospital.sql:/docker-entrypoint-initdb.d/hospital.sql
+      - ./hospital_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5442:5432"
